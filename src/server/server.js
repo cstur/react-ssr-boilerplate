@@ -2,6 +2,12 @@ import http    from 'http';
 import express from 'express';
 import colors  from 'colors';
 import path    from 'path';
+import bodyParser from 'body-parser';
+
+// Security
+// import passport from 'passport';
+// import bcrypt   from 'bcrypt';
+import session  from './session.js';
 
 // Server Side Rendering
 import {
@@ -9,9 +15,34 @@ import {
   renderDevPage
 } from './ssr.js';
 
+// ENV
+import dotenv from 'dotenv';
+
+// Import .env and expand variables: Sets process.env[VARS] as a side-effect.
+dotenv.config();
+
 const PROD = process.env.NODE_ENV === 'production';
 
 const app = express();
+const httpServer = http.createServer(app);
+
+const commonMiddleware = [
+  session,
+  // passport.initialize(),
+  // passport.session()
+];
+
+app.use(bodyParser.json());
+
+commonMiddleware.forEach((ware) => {
+  app.use(ware);
+});
+
+// Password Configuration
+// passport.use(UserAuthStrategy);
+// passport.serializeUser(serializeUser);
+// passport.deserializeUser(deserializeUser);
+
 
 if (PROD) {
   app.use('/static', express.static('build'));

@@ -4,6 +4,8 @@
   "description": "Univeral JS application utilizing Hot Module Reloading, Server Side Rendering, Code Splitting with React, Redux, React Router 4 and a heroku like deploy setup with Dokku.",
   "main": "index.js",
   "scripts": {
+    "start": "npm run production",
+    "postinstall": "npm run build",
     "development": "NODE_PATH=./src NODE_ENV=development node ./src/server/server.babel.js",
     "production": "NODE_PATH=./src NODE_ENV=production node ./src/server/server.babel.js",
     "build": "npm run build:client && npm run build:server",

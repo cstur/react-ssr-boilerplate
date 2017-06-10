@@ -1,7 +1,7 @@
 {
-  "name": "univeral-hmr-ssr-react-redux-dokku",
+  "name": "instawatch",
   "version": "1.0.0",
-  "description": "Univeral JS application utilizing Hot Module Reloading, Server Side Rendering, Code Splitting with React, Redux, React Router 4 and a heroku like deploy setup with Dokku.",
+  "description": "An application to get notified",
   "main": "index.js",
   "scripts": {
     "start": "npm run production",
@@ -10,7 +10,7 @@
     "production": "NODE_PATH=./src NODE_ENV=production node ./src/server/server.babel.js",
     "build": "npm run build:client && npm run build:server",
     "build:server": "NODE_ENV=production webpack --config ./webpack/server.babel.js",
-    "build:client": "NODE_ENV=production webpack --config ./webpack/client.babel.js"
+    "build:client": "NODE_ENV=production webpack --config ./webpack/client.babel.js",
   },
   "keywords": [
     "react",

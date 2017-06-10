@@ -16,10 +16,10 @@ import {
 } from './ssr.js';
 
 // ENV
-import dotenv from 'dotenv';
-
-// Import .env and expand variables: Sets process.env[VARS] as a side-effect.
-dotenv.config();
+// import dotenv from 'dotenv';
+//
+// // Import .env and expand variables: Sets process.env[VARS] as a side-effect.
+// dotenv.config();
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -77,7 +77,7 @@ app.use(function(err, req, res, next) {
 
 const server = http.createServer(app);
 
-server.listen(8080, function() {
+server.listen(process.env.PORT, function() {
    const address = server.address();
-   console.log(`${'>>>'.cyan} ${'Listening on:'.rainbow} ${'localhost::'.trap.magenta}${`${address.port}`.green}`);
+   console.log(`${'>>>'.cyan} ${'Listening on:'.rainbow} ${`${address.host}::`.magenta}${`${address.port}`.green}`);
  });

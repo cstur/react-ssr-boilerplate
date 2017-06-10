@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: alexjray/instawatch-web-app:version1.0
+    build: .
     links:
       - db
     depends_on:

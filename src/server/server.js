@@ -15,12 +15,6 @@ import {
   renderDevPage
 } from './ssr.js';
 
-// ENV
-// import dotenv from 'dotenv';
-//
-// // Import .env and expand variables: Sets process.env[VARS] as a side-effect.
-// dotenv.config();
-
 const PROD = process.env.NODE_ENV === 'production';
 
 const app = express();

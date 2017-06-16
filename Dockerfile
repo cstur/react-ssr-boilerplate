@@ -1,17 +1,19 @@
 FROM node:boron
 
-RUN mkdir -p /app
+RUN useradd --user-group --create-home --shell /bin/false app
 
-# Install app dependencies
-COPY . /app
+ENV HOME=/home/app
 
-# Change working directory
-WORKDIR /app
+COPY . $HOME/instawatch/
+RUN chown -R app:app $HOME/*
 
-# Install dependencies
+USER app
+WORKDIR $HOME/instawatch
 RUN npm install
 
-# Launch Application
-CMD [ "npm", "start" ]
+USER root
+COPY . $HOME/instawatch
+RUN chown -R app:app $HOME/*
+USER app
 
-USER node
+CMD ["npm", "run", "production"]

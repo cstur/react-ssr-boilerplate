@@ -17,11 +17,15 @@ services:
       - DATABASE_URL=postgres://postgres@db:5432/dev
       - DATABASE_DEBUG=false
       - SESSION_SECRET="d3bcddbf-3687-45c4-bc8d-81b6ac34edfd"
+      - NODE_ENV=development
       - PORT=8080
       - PROTOCOL=http
-    user: node
 
-    command: npm start
+    volumes:
+      - .:/home/app/instawatch
+      - /home/app/instawatch/node_modules
+
+    command: npm run development
   db:
     image: postgres:9.6.3-alpine
     tmpfs:

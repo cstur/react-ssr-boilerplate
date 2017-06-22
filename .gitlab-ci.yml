@@ -1,0 +1,10 @@
+before_script:
+  - docker info
+
+build_pro:
+  script:
+    - docker build --rm -t sdongjie/node-xweb .
+    - docker stop node-xweb || true && docker rm node-xweb || true
+    - docker run -p 6007:6010 --name node-xweb -d sdongjie/node-xweb
+  only:
+    - master

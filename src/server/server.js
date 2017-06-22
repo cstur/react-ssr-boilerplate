@@ -7,7 +7,8 @@ import bodyParser from 'body-parser';
 // Security
 // import passport from 'passport';
 // import bcrypt   from 'bcrypt';
-import session  from './session.js';
+// import session  from './session.js';
+import session from 'express-session';
 
 // Server Side Rendering
 import {
@@ -16,12 +17,8 @@ import {
 } from './ssr.js';
 
 const PROD = process.env.NODE_ENV === 'production';
-
 const app = express();
-const httpServer = http.createServer(app);
-
 const commonMiddleware = [
-  session,
   // passport.initialize(),
   // passport.session()
 ];
@@ -32,11 +29,18 @@ commonMiddleware.forEach((ware) => {
   app.use(ware);
 });
 
+/*
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+*/
+
 // Password Configuration
 // passport.use(UserAuthStrategy);
 // passport.serializeUser(serializeUser);
 // passport.deserializeUser(deserializeUser);
-
 
 if (PROD) {
   app.use('/static', express.static('build'));
@@ -73,5 +77,5 @@ const server = http.createServer(app);
 
 server.listen(process.env.PORT, function() {
    const address = server.address();
-   console.log(`${'>>>'.cyan} ${'Listening on:'.rainbow} ${`${address.address}`.magenta}${`${address.port}`.green}`);
+   console.log(`${'>>>'.cyan} ${'Listening on:'.cyan} ${`${address.address}`.cyan}${`${address.port}`.green}`);
  });
